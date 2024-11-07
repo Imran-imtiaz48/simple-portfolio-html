@@ -131,34 +131,36 @@ Happy <span id="ing"></span><br />
   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
   crossorigin="anonymous"></script>
 <script>
+	// Glitch text effect
+	const things = [
+		'coding', 'knitting', 'blogging', 'designing', 'planning', 'writing', 
+		'programming', 'concluding', 'thinking', 'scripting', 'sewing', 'sketching',
+		'ruminating', 'deliberating', 'pondering', 'contemplating', 'abstracting', 
+		'optimising', 'refactoring', 'objectifying', 'simplifying', 'decoupling', 
+		'debugging', 'configuring', 'streamlining', 'searching', 'tweaking', 'editing'
+	];
+	const junk = ['#', '@', '%', '*', '&', '<', '>', '_', '=', '+', '[', ']', '|', '-', '!', '?', 'X'];
 
-	// glitch text
-
-	var things = ['coding','knitting','blogging','blogging','blogging','blogging','blogging','designing','planning','writing','writing','writing','writing','writing','writing','writing','programming','programming','programming','programming','programming','concluding','programming','thinking','scripting','scripting','scripting','scripting','scripting','sewing','sketching','ruminating','deliberating','pondering','contemplating','abstracting','abstracting','abstracting','abstracting','abstracting','abstracting','optimising','optimising','optimising','optimising','optimising','optimising','refactoring','refactoring','refactoring','objectifying','simplifying','decoupling','debugging','debugging','debugging','debugging','debugging','debugging','configuring','streamlining','searching','tweaking','editing'];
-	var junk = ['#','@','%','*','&amp;','&lt;','&gt;','_','=','+','[',']','|','-','!','?','X'];
-
-	function randomInt(min, max)
-	{
-		return Math.round(min + (Math.random() * (max-min)));
+	function randomInt(min, max) {
+		return Math.floor(min + Math.random() * (max - min + 1));
 	}
 
-	function tick()
-	{
-		var txt = things[randomInt(0, things.length-1)];
-		var chars = txt.split('');
-		var glitch = randomInt(0, 3);
-		for (var i = 0; i < glitch; i++)
-		{
-			chars[randomInt(0, chars.length-1)] = junk[randomInt(0, junk.length-1)];
+	function glitchText() {
+		let txt = things[randomInt(0, things.length - 1)];
+		let chars = txt.split('');
+		const glitchCount = randomInt(1, 3); // Random number of glitches from 1 to 3 for variation
+
+		for (let i = 0; i < glitchCount; i++) {
+			const index = randomInt(0, chars.length - 1);
+			chars[index] = junk[randomInt(0, junk.length - 1)];
 		}
-		txt = chars.join('');
-		$('#ing').html(txt);
-		window.setTimeout(tick, randomInt(16,400));
+
+		document.getElementById('ing').innerHTML = chars.join('');
+		setTimeout(glitchText, randomInt(16, 400)); // Adjusting the delay for a more fluid effect
 	}
 
-	if(document.getElementById('ing') != null) tick();
-
-
+	// Check if 'ing' element exists before starting
+	if (document.getElementById('ing')) glitchText();
 </script>
 
 
